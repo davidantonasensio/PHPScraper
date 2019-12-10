@@ -21,17 +21,17 @@
 /**
  * Database configuration 
  */ 
-$IDANAS_CONFIGURATION["DB_HOST"] = "localhost";
-$IDANAS_CONFIGURATION["DB_USER"] = "web0"; 
-$IDANAS_CONFIGURATION["DB_PASSWORD"] = "+#muzmrv"; 
-$IDANAS_CONFIGURATION["DB_DBNAME"] = "idanasSEO";
+$IDANAS_CONFIGURATION["DB_HOST"] = "";
+$IDANAS_CONFIGURATION["DB_USER"] = ""; 
+$IDANAS_CONFIGURATION["DB_PASSWORD"] = ""; 
+$IDANAS_CONFIGURATION["DB_DBNAME"] = "";
 
 /**
  * DB Tables 
  */ 
-$IDANAS_CONFIGURATION["statistics"]["table"] = "statistics";
-$IDANAS_CONFIGURATION["users"]["table"] = "users";
-$IDANAS_CONFIGURATION["keywords"]["table"] = "keywords";
+$IDANAS_CONFIGURATION["statistics"][""] = "";
+$IDANAS_CONFIGURATION["users"]["table"] = "";
+$IDANAS_CONFIGURATION["keywords"]["table"] = "";
 
 /**
  * Paths configuration

@@ -346,9 +346,9 @@ function send($contrat, $toEmails, $result, $prozent1, $contracter)
         $mailer->isSMTP();                                            // Send using SMTP
         $mailer->Host       = 'smtp.idanas.com';                     // Set the SMTP server to send through
         $mailer->SMTPAuth   = true;                                   // Enable SMTP authentication
-        $mailer->Username   = 'register@idanas.com';                  // SMTP username
-        $mailer->Password   = 'r$5U9os2Ty&6f';                        // SMTP password
-        $mailer->From       = 'register@idanas.com';
+        $mailer->Username   = '';                  // SMTP username
+        $mailer->Password   = '';                        // SMTP password
+        $mailer->From       = '';
         $mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
         $mailer->Port       = 25;                                     // TCP port to connect to
     
