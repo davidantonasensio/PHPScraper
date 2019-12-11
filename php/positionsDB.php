@@ -32,7 +32,7 @@ require $mainBasicFunctionsIdanas->conf["LIBPATH"] . 'db.php';
 require $mainBasicFunctionsIdanas->conf["LIBPATH"] . 'dbaccess.php';
 
 /** Idanas PHPScraper */
-require $mainBasicFunctionsIdanas->conf["LIBPATH"] . 'search.php'; 
+require $mainBasicFunctionsIdanas->conf["LIBPATH"] . 'phpscraper.php'; 
 
 /** Import PHPMailer classes into the global namespace */
 use PHPMailer\PHPMailer\PHPMailer;
@@ -93,7 +93,7 @@ function getData($mainBasicFunctionsIdanas)
     $sqlDomainInfoKW = ' SELECT  id, contrat_nr, domain, language, playdaymonth, 
     pages, keywords, contracter, emails 
     FROM keywords
-    WHERE id = "212" ';
+    WHERE id = "212" OR id= "213" ';
     // WHERE id = "212" OR id= "213" OR  id= "201"';
     // WHERE id='212' OR id='201' ';
 
@@ -162,7 +162,8 @@ function getData($mainBasicFunctionsIdanas)
                 $queriescounter, $startTime, $recordStarttime
             );
 
-            $KWPositions = $search->results();            
+            $KWPositions = $search->results(); 
+
 
             $result = resultHTMLBuilder($KWPositions, $domainName, $langSearch);
 
@@ -236,12 +237,9 @@ function resultHTMLBuilder($KWPositions, $domainName, $langSearch)
             $HTMLRows .= '<tr><td>';
             if (preg_match('/TOP/', $position)) {
                 if (preg_match('/NOT/', $position)) {
-                    //echo $KW . " - Palabra no encontrada: " . $position . "\n";
                     $HTMLRows .= $KW . "</td>";
                     $HTMLRows .= '<td> ' . $position . "\n";
                 } else {
-                    //echo $KW . " - Palabra encontrada: " . $position . "\n";
-                    //echo "Link: https://" . $URLQuery . "\n";
                     $counterTopPositions++;
                     $HTMLRows .= '<a href="https://'.$URLQuery.'"><strong>' 
                         . str_replace("+", " ", $KW) . "</strong></a></td>";
@@ -249,14 +247,11 @@ function resultHTMLBuilder($KWPositions, $domainName, $langSearch)
                 }                
 
             } elseif ($position >= 1) {
-                //echo $KW . " - Palabra encontrada: " . $position . "\n";  
-                //echo "Link: https://" . $URLQuery . "\n"; 
                 $HTMLRows .= '<a href="https://'. $URLQuery .'"><strong>' 
                     . str_replace("+", " ", $KW) . "</strong></a></td>";  
                 $HTMLRows .= '<td><strong> ' . $position . "</strong>\n";     
                 $counterTopPositions++;      
             } else {
-                //echo $KW . " - Palabra no encontrada " . $position . "\n";
                 $HTMLRows .= $KW . "</td>";
                 $HTMLRows .= '<td><strong> ' . $position . "</strong>\n";
             }
@@ -294,10 +289,8 @@ function resultHTMLBuilder($KWPositions, $domainName, $langSearch)
 function ober20($prozent) 
 {
     if ($prozent >= 20) {
-        echo "ober the 20% - ";
         return 1;
     } else {
-        echo "unter the 20% - ";
         return 0;
     }
 }
@@ -346,9 +339,9 @@ function send($contrat, $toEmails, $result, $prozent1, $contracter)
         $mailer->isSMTP();                                            // Send using SMTP
         $mailer->Host       = 'smtp.idanas.com';                     // Set the SMTP server to send through
         $mailer->SMTPAuth   = true;                                   // Enable SMTP authentication
-        $mailer->Username   = '';                  // SMTP username
-        $mailer->Password   = '';                        // SMTP password
-        $mailer->From       = '';
+        $mailer->Username   = 'register@idanas.com';                  // SMTP username
+        $mailer->Password   = 'r$5U9os2Ty&6f';                        // SMTP password
+        $mailer->From       = 'register@idanas.com';
         $mailer->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
         $mailer->Port       = 25;                                     // TCP port to connect to
     

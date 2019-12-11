@@ -14,11 +14,13 @@ $pages = $validate->basicClean($mainBasicFunctionsIdanas->getConfig("config_url"
 $text = urldecode ($text);
 $domainName = urldecode ($domainName);
 
+/*
 if (!isValidDomainName($domainName)) {
     echo "Not a acepted Domain Name or it doesn't exist??: " . $domainName . "<br>";
     echo 'exiting';
     exit;   
 }
+*/
 
 //$snippets1 = 'xxxxxxxxxxx'; // This is the begining of the SERPS     
 $snippets1 = '<div class="srg"'; // This is the begining of the SERPS
@@ -28,11 +30,12 @@ $snippets3 = '<div data-hveid="'; // <div data-hveid="   or   <div class="g">
 $generator = new \Idanas\PHPScraper\Seo\PHPScraper(
     trim($snippets1), trim($snippets2), trim($snippets3)
 );
+
 $generator->buildURL($domainName, $text, $language, $pages, $language);
 $KWPositions = $generator->results();
 
 $HTMLForm = resultHTMLBuilder($KWPositions, $domainName, $language);
-echo $HTMLForm;
+print($HTMLForm);
 
 
 /**
@@ -56,25 +59,19 @@ function resultHTMLBuilder($KWPositions, $domainName, $language) {
             {
                 if( preg_match('/NOT/', $position) )
                 {
-                    //echo $KW . " - Palabra no encontrada: " . $position . "\n";
                     $HTMLRows .= $KW . "</td>";
                     $HTMLRows .= '<td><strong> ' . $position . "</strong>\n";
                 } else {
-                    //echo $KW . " - Palabra encontrada: " . $position . "\n";
-                    //echo "Link: https://" . $query . "\n";
                     $counterTopPositions++;
                     $HTMLRows .= '<a href="https://'.$query.'"><strong>' . str_replace("+", " ", $KW) . "</strong></a></td>";
                     $HTMLRows .= '<td><strong> ' . $position . "</strong>\n";
                 }                
 
             } elseif( $position >= 1 ) {
-                //echo $KW . " - Palabra encontrada: " . $position . "\n";  
-                //echo "Link: https://" . $query . "\n"; 
                 $HTMLRows .= '<a href="https://'.$query.'"><strong>' . str_replace("+", " ", $KW) . "</strong></a></td>";  
                 $HTMLRows .= '<td><strong> ' . $position . "</strong>\n";     
                 $counterTopPositions++;      
             } else {
-                //echo $KW . " - Palabra no encontrada " . $position . "\n";
                 $HTMLRows .= $KW . "</td>";
                 $HTMLRows .= '<td><strong> ' . $position . "</strong>\n";
             }
@@ -101,40 +98,6 @@ function resultHTMLBuilder($KWPositions, $domainName, $language) {
     return $HTML;        
 }
 
-/**
- * Adding HTTP if already not in the domain.
- * Validates only HTTP and https in a scheme.
- * Validates URL.
- * Checks A record of the domain name.
- * Validates server header response.
- * Validates the host.
- * Removes www. if you don't want it.
- */
-function isValidDomainName($domainName)
-{
-    //$domainName = "fotograf.david-anton.com";
 
-    $validation = FALSE;
-    $domainNameparts = parse_url(filter_var($domainName, FILTER_SANITIZE_URL));
-    if(!isset($domainNameparts['host'])){
-        $domainNameparts['host'] = $domainNameparts['path'];
-    }
-
-    if($domainNameparts['host']!=''){
-        if (!isset($domainNameparts['scheme'])){
-            $domainNameparts['scheme'] = 'http';
-        }
-        if(checkdnsrr($domainNameparts['host'], 'A') && in_array($domainNameparts['scheme'],array('http','https')) && ip2long($domainNameparts['host']) === FALSE){ 
-            $domainNameparts['host'] = preg_replace('/^www\./', '', $domainNameparts['host']);
-            $domainName = $domainNameparts['scheme'].'://'.$domainNameparts['host']. "/";            
-            
-            if (filter_var($domainName, FILTER_VALIDATE_URL) !== false && @get_headers($domainName)) {
-                $validation = TRUE;
-            }
-        }
-    }
-
-    return $validation;    
-}
 
 ?>

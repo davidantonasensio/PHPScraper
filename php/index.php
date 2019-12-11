@@ -27,7 +27,7 @@ require_once $mainBasicFunctionsIdanas->conf["LIBPATH"] . 'dbaccess.php';
 
 require $mainBasicFunctionsIdanas->conf['LIBPATH'] . 'validator.php';
 require $mainBasicFunctionsIdanas->conf["LIBPATH"] . 'auth.php';
-require $mainBasicFunctionsIdanas->conf['LIBPATH'] . 'search.php';
+require $mainBasicFunctionsIdanas->conf['LIBPATH'] . 'phpscraper.php';
 
 
 $module = $mainBasicFunctionsIdanas->getConfig("config_url", "module");
