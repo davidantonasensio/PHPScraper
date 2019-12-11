@@ -60,6 +60,10 @@ PHPScraper itself doesn't make any validation, except to check if the Domamin Na
 Be careful programing your tools to access PHPScraper and validate any input made by possible users
 Thought that this tool should be used for personal use and not to be of public domain, i thing security here shouldn't be a great problem and should be easy to control
 
+### PHPScraper Version
+
+0.6.1
+
 ## History
 I did the first version of this tool back in 2005 but never thought it could be interesting for someone else
 
