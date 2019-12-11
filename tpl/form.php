@@ -1,3 +1,8 @@
+<?php
+if($_SERVER['HTTP_HOST'] == 'phpscraper.idanas.de') {
+    print('<br><strong>Don\'t write more than 5 KWs here, the system will cut away everything over that</strong><br><br>');
+}
+?>
 <table width="400" border="0" cellpadding="0" cellspacing="0" class="pad10">
     <tr><td class="normalblack10">
         <form action="index.php?module=posspy&submited=1" method="post" enctype="application/x-www-form-urlencoded" name="form1">

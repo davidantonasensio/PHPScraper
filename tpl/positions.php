@@ -11,7 +11,7 @@ $language = $validate->basicClean($mainBasicFunctionsIdanas->getConfig("config_u
 $text = $validate->basicClean($mainBasicFunctionsIdanas->getConfig("config_url", "text"));
 $pages = $validate->basicClean($mainBasicFunctionsIdanas->getConfig("config_url", "pages"));
 
-$text = urldecode ($text);
+
 $domainName = urldecode ($domainName);
 
 /*
@@ -30,6 +30,21 @@ $snippets3 = '<div data-hveid="'; // <div data-hveid="   or   <div class="g">
 $generator = new \Idanas\PHPScraper\Seo\PHPScraper(
     trim($snippets1), trim($snippets2), trim($snippets3)
 );
+
+/**
+ * For Demo page, to reduce the max KW to test just 5 KW
+ */
+$text = urldecode ($text);
+//echo "text1111:<br>" . $text . "<br>";
+if($_SERVER['HTTP_HOST'] == 'phpscraper.idanas.de') {  
+    $KWList = explode("\n", $text);
+    if (count($KWList) > 5) {
+        $textSplited = explode($KWList[5], $text);
+        $text = $textSplited[0];
+    }
+}
+//echo "text2222:<br>" . $text . "<br>";
+
 
 $generator->buildURL($domainName, $text, $language, $pages, $language);
 $KWPositions = $generator->results();
