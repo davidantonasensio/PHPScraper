@@ -5,7 +5,7 @@ PHPScriper is a class to check search engine positions for a KeyWord (KW) or lis
 - Validates Domain Name
 - 5 Languages search English, German, Spanish, French, Italian
 - Several User-Agents randomly chosen to avoid being blocked
-- After each search, PHPScreper weit randomly between 15 and 30 Seconds to avoid being blocked. There is a way to go over this problem using the debugger tool      from Facebook like s0md3v describes in is goop https://github.com/s0md3v/goop
+- After each search, PHPScreper wait randomly between 15 and 30 Seconds to avoid being blocked. There is a way to go over this problem using the debugger tool      from Facebook like s0md3v describes in is goop https://github.com/s0md3v/goop
   anyway, waiting longer that 15 seconds for each request looks to be actually safe 20191201
 - includes actual delimiters for Google search result page 20191201
      * @param $snippets1 Beginning of group of SERPs '<div class="srg"'
